@@ -1,0 +1,4 @@
+*.zip
+deployment/
+.vscode/
+venv/
