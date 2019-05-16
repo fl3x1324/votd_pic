@@ -30,8 +30,7 @@ def votd_fetch_kjv(object, context):
         bucket_name = 'votd-img'
         votd_upload_image(file_name, bucket_name, img_response.content)
 
+        def votd_upload_image(file_name, bucket_name, data):
+            s3.Bucket(bucket_name).put_object(Key=file_name, Body=data)
 
-def votd_upload_image(file_name, bucket_name, data):
-    s3.Bucket(bucket_name).put_object(Key=file_name, Body=data)
-
-votd_fetch_kjv(None, None)
+            votd_fetch_kjv(None, None)
