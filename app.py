@@ -26,13 +26,12 @@ def votd_fetch_kjv(object, context):
         print('Day: ' + str(day_of_year))
         img_req_headers = {'accept': 'image/jpeg'}
         img_response = requests.get(img_url, img_req_headers)
-        votd_upload_image('votd.jpg', 'votd-img', img_response.content)
+        file_name = str(day_of_year) + '/' + 'votd.jpg'
+        bucket_name = 'votd-img'
+        votd_upload_image(file_name, bucket_name, img_response.content)
 
 
-def votd_upload_image(file_name, bucket, data):
-    s3.Bucket(bucket).put_object(Key=file_name, Body=data)
-
+def votd_upload_image(file_name, bucket_name, data):
+    s3.Bucket(bucket_name).put_object(Key=file_name, Body=data)
 
 votd_fetch_kjv(None, None)
-
-# votd_upload_image('test.txt', 'votd-img', 'hello S3!')
