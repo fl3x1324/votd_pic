@@ -16,7 +16,8 @@ def votd_fetch_kjv(object, context):
                'x-youversion-developer-token': yvApiKey}
     day_of_year = datetime.now().timetuple().tm_yday
     response = requests.get(yvApiBaseUrl + '/verse_of_the_day/' +
-                            str(day_of_year) + '?version_id=1', headers=headers)
+                            str(day_of_year) + '?version_id=1',
+                            headers=headers)
     payload = response.content.decode('utf-8')
     if response.status_code == 200:
         # print(payload)
@@ -30,7 +31,9 @@ def votd_fetch_kjv(object, context):
         bucket_name = 'votd-img'
         votd_upload_image(file_name, bucket_name, img_response.content)
 
-        def votd_upload_image(file_name, bucket_name, data):
-            s3.Bucket(bucket_name).put_object(Key=file_name, Body=data)
 
-            votd_fetch_kjv(None, None)
+def votd_upload_image(file_name, bucket_name, data):
+    s3.Bucket(bucket_name).put_object(Key=file_name, Body=data)
+
+
+votd_fetch_kjv(None, None)
